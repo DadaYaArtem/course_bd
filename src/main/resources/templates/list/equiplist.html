@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My notes</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+
+<body class="bg-success p-5 bg-opacity-10">
+
+<div class="row">
+  <h1 class="col" th:text="'Equipment count  ' + ${count} +' pcs'"></h1>
+
+</div>
+<br>
+<h3 th:if="${count} == 0" th:text="'No equipment'"></h3>
+<br>
+<div class="frame" th:if="${count} != 0">
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Equipment</th>
+      <th>Model</th>
+      <th>Description</th>
+      <th>Condition</th>
+      <th>Category</th>
+      <th>Current Workplace</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="equip: ${listOfEquip}">
+      <td th:text="${equip.id}"></td>
+      <td th:text="${equip.name}"></td>
+      <td th:text="${equip.model}"></td>
+      <td th:text="${equip.description}"></td>
+      <td th:text="${equip.condition}"></td>
+      <td th:text="${equip.category.getCategoryName()}"></td>
+      <td th:text="'Workplace address: ' + ${equip.workplace.getAddress()} + ', Head manager: ' + ${equip.workplace.getHeadManager()}"></td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <h1 class="col" th:text="'Show responsible employee for equipment id: '"></h1>
+  <form action="#" th:action="@{/employee/byEquipment}" method="get">
+    <label for="idEquip">Enter a number:</label>
+    <input type="number" id="idEquip" name="idEquip" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+  </form>
+</div>
+
+<div>
+  <h1 class="col" th:text="'Show history of equip moving workplaces: '"></h1>
+  <form action="#" th:action="@{/workplace/byEquipment}" method="get">
+    <label for="idEquipW">Enter a number:</label>
+    <input type="number" id="idEquipW" name="idEquipW" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+  </form>
+</div>
+
+<div>
+  <h1 class="col" th:text="'Show history of equip revaluations: '"></h1>
+  <form action="#" th:action="@{/revaluation/byEquipment}" method="get">
+    <label for="idEquipRev">Enter a number:</label>
+    <input type="number" id="idEquipRev" name="idEquipRev" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+  </form>
+</div>
+
+<div>
+  <h1 class="col" th:text="'Show history of equipment repairments: '"></h1>
+  <form action="#" th:action="@{/repairment/byEquipment}" method="get">
+    <label for="idEquipRep">Enter a number:</label>
+    <input type="number" id="idEquipRep" name="idEquipRep" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+  </form>
+</div>
+
+</body>
+</html>

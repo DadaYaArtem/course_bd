@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My notes</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+
+<body class="bg-success p-5 bg-opacity-10">
+
+<div class="row">
+  <h1 class="col" th:text="'Purchases count  ' + ${count} +' pcs'"></h1>
+
+</div>
+<br>
+<h3 th:if="${count} == 0" th:text="'No purchases'"></h3>
+<br>
+<div class="frame" th:if="${count} != 0">
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Equipment</th>
+      <th>Price</th>
+      <th>Purchase date</th>
+      <th>Provider</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="purch: ${listOfPurchases}">
+      <td th:text="${purch.id}"></td>
+      <td th:text="'Equipmemt: ' + ${purch.equipment.name} + ${purch.equipment.model}"></td>
+      <td th:text="${purch.price}"></td>
+      <td th:text="${purch.purchaseDate}"></td>
+      <td th:text="${purch.provider.providerName}"></td>
+
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+
+</body>
+</html>
